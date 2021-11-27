@@ -1,0 +1,17 @@
+# Unity
+Library/
+Temp/
+obj/
+
+# IDE
+.vscode/
+.gradle/
+.vs/
+.idea/
+
+# Asset Store
+Assets/AssetStoreTools/
+Assets/AssetStoreTools.meta
+
+# Misc
+.DS_Store
