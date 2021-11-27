@@ -1,0 +1,39 @@
+{
+  "name": "@natsuite/resnet18",
+  "version": "0.0.1",
+  "description": "Image classifier for our super-important top-secret new product.",
+  "scripts": {
+    "build": "tsc",
+    "test": "npx ts-node --require dotenv/config sample/sample.ts"
+  },
+  "author": "NatML <hi@natsuite.io> (https://natml.ai)",
+  "license": "MIT",
+  "homepage": "https://hub.natml.ai/@natsuite/resnet18",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natml-hub/ResNet18.git"
+  },
+  "main": "dist/lib/index.js",
+  "module": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "natml": "^0.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.10",
+    "dotenv": "^10.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  },
+  "keywords": [
+    "natml",
+    "ml",
+    "machine learning",
+    "deep learning",
+    "pytorch",
+    "tensorflow"
+  ]
+}
