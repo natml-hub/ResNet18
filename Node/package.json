@@ -3,8 +3,11 @@
   "version": "0.0.1",
   "description": "Image classifier for our super-important top-secret new product.",
   "scripts": {
-    "build": "tsc",
-    "test": "npx ts-node --require dotenv/config sample/sample.ts"
+    "build": "tsc && webpack",
+    "test": "npx ts-node --require dotenv/config sample/sample.ts",
+    "prepare": "cd .. && husky install Node/.husky",
+    "prepublishOnly": "npm run build",
+    "format": "prettier --write ./{src,test}/**/*.{ts,js}"
   },
   "author": "NatML <hi@natsuite.io> (https://natml.ai)",
   "license": "MIT",
@@ -14,19 +17,24 @@
     "url": "git+https://github.com/natml-hub/ResNet18.git"
   },
   "main": "dist/lib/index.js",
-  "module": "dist/lib/index.js",
-  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "natml": "^0.0.4"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",
     "dotenv": "^10.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "^2.5.1",
+    "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
   },
   "keywords": [
     "natml",
@@ -35,5 +43,8 @@
     "deep learning",
     "pytorch",
     "tensorflow"
-  ]
+  ],
+  "lint-staged": {
+    "*.{js,ts,css,md}": "prettier --write"
+  }
 }
