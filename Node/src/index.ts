@@ -1,6 +1,5 @@
-/* 
-*   resnet18
-*   Copyright (c) 2021 NatML.
-*/
-
-export * from "./ResNet18HubPredictor"
+/**
+ *   resnet18
+ *   Copyright (c) 2021 NatML.
+ */
+export { default } from "./ResNet18HubPredictor";
