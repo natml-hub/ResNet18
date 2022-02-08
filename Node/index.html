@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+  <script src="./node_modules/natml/dist/natml.umd.js"></script>
+  <script src="./dist/resnet18.umd.js"></script>
+  <script>
+    // The natml script tag above expose NatML classes on a window.natml object.
+    // The predictor is directly on the window object.
+    const { MLImageFeature, MLModelData } = natml;
+    const { ResNet18HubPredictor } = window;
+
+    window.addEventListener('DOMContentLoaded', async function() {
+      const inputElm = document.getElementById('file');
+      const imageElm = document.getElementById('image');
+      const outputElm = document.getElementById('output');
+
+      function showPredictionStatus(str) {
+        outputElm.innerText = str;
+      }
+
+      inputElm.style.display = 'none';
+      showPredictionStatus("Predictor Loading...");
+
+      const modelData = await MLModelData.fromHub("@natsuite/resnet18", {
+        accessKey: "nqL2-q1qw_0keB_v8FPBi",
+        baseUrl: "https://staging.api.natml.ai/graph",
+      });
+
+      const model = modelData.deserialize();
+      const predictor = new ResNet18HubPredictor(model);
+
+      inputElm.style.display = 'block';
+      showPredictionStatus("Choose a file...");
+
+      inputElm.addEventListener("change", async function(event) {
+        const [image] = inputElm.files;
+
+        if(!image) {
+          showPredictionStatus("No image selected");
+          return;
+        }
+
+        imageElm.src = URL.createObjectURL(image);
+
+        const feature = new MLImageFeature(image);
+        try {
+          showPredictionStatus('Prediction in progress...');
+          const [label, score] = await predictor.predict(feature);
+          showPredictionStatus(`Image contains ${label} with confidence ${score}`);
+        } catch (error) {
+          showPredictionStatus(`Prediction failed... ${error}`);
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <input type="file" id="file" />
+  <img id="image" />
+  <div id="output"></div>
+</body>
