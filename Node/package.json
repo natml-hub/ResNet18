@@ -4,8 +4,9 @@
   "description": "Image classifier for our super-important top-secret new product.",
   "scripts": {
     "build": "tsc && webpack",
+    "build:watch": "webpack --watch",
     "test": "npx ts-node --require dotenv/config sample/sample.ts",
-    "prepare": "cd .. && husky install Node/.husky",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run build",
     "format": "prettier --write ./{src,test}/**/*.{ts,js}"
   },

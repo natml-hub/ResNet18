@@ -24,15 +24,7 @@ module.exports = {
       name: "ResNet18HubPredictor",
       export: "default",
     },
-    // make the predictor add its class to the existing natml global, while
-    // still being a umd bundle (as opposed to using webpack's assign-properties
-    // type), to ensure it works with unpkg. This leads to a little less global
-    // pollution, and a little better DX (without it, some things are looked up
-    // on the natml global, while others aren't, which is confusing). The
-    // downside of this is that the predictor can't be loaded in parallel with
-    // the natml library, but we don't care. This umd setup is for people who
-    // want something simple; it's not for optimal performance.
-    globalObject: "natml",
+    globalObject: "this",
     path: path.resolve(__dirname, "dist"),
   },
   externals: {
